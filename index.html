@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AttoShohoj 3D Portfolio</title>
+<title>AttoShohoj 3D Science Library</title>
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
@@ -17,48 +17,25 @@ body {
 /* Header */
 header {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 /* Layout */
 .container {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr 280px;
   height: 90vh;
 }
 
 /* Viewer */
-viewer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.viewer-box {
+  position: relative;
+  background: #111;
 }
 
 model-viewer {
   width: 100%;
-  height: 90vh;
-  background: #111;
-}
-
-/* Sidebar gallery */
-.sidebar {
-  background: #111;
-  padding: 10px;
-  overflow-y: auto;
-}
-
-.thumb {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: #222;
-  cursor: pointer;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.thumb:hover {
-  background: #333;
+  height: 100%;
 }
 
 /* Loading */
@@ -67,7 +44,33 @@ model-viewer {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  font-size: 20px;
+  font-size: 18px;
+  z-index: 10;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #0d0d0d;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.category {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #00ffcc;
+}
+
+.item {
+  padding: 8px;
+  margin: 5px 0;
+  background: #222;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.item:hover {
+  background: #333;
 }
 </style>
 </head>
@@ -75,29 +78,40 @@ model-viewer {
 <body>
 
 <header>
-  <h1>🚀 AttoShohoj 3D Portfolio</h1>
+  <h2>🚀 AttoShohoj 3D Science Library</h2>
 </header>
 
 <div class="container">
 
-  <div style="position:relative;">
-    <div id="loading">Loading 3D Model...</div>
+  <!-- Viewer -->
+  <div class="viewer-box">
+    <div id="loading">Loading Model...</div>
 
     <model-viewer
       id="viewer"
       src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
       auto-rotate
-      camera-controls
-      onload="document.getElementById('loading').style.display='none'">
+      camera-controls>
     </model-viewer>
   </div>
 
+  <!-- Sidebar -->
   <div class="sidebar">
-    <h3>🎯 Models</h3>
 
-    <div class="thumb" onclick="loadModel('Astronaut')">Astronaut</div>
-    <div class="thumb" onclick="loadModel('RobotExpressive')">Robot</div>
-    <div class="thumb" onclick="loadModel('Duck')">Duck</div>
+    <!-- CHANGED SECTION -->
+    <div class="category">🧬 Zoology</div>
+    <div class="item" onclick="loadModel('zoology/heart.glb')">Heart</div>
+    <div class="item" onclick="loadModel('zoology/brain.glb')">Brain</div>
+
+    <div class="category">🌿 Botany</div>
+    <div class="item" onclick="loadModel('botany/leaf.glb')">Leaf</div>
+
+    <div class="category">⚗️ Chemistry</div>
+    <div class="item" onclick="loadModel('chemistry/h2o.glb')">Water (H2O)</div>
+
+    <div class="category">⚙️ Physics</div>
+    <div class="item" onclick="loadModel('physics/magnet.glb')">Magnet</div>
+
   </div>
 
 </div>
@@ -106,20 +120,14 @@ model-viewer {
 const viewer = document.getElementById("viewer");
 const loading = document.getElementById("loading");
 
-function loadModel(name) {
+function loadModel(path) {
   loading.style.display = "block";
 
-  const models = {
-    Astronaut: "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
-    RobotExpressive: "https://modelviewer.dev/shared-assets/models/RobotExpressive.glb",
-    Duck: "https://modelviewer.dev/shared-assets/models/Duck.glb"
-  };
+  viewer.src = "models/" + path;
 
-  viewer.src = models[name];
-
-  setTimeout(() => {
+  viewer.addEventListener("load", () => {
     loading.style.display = "none";
-  }, 1000);
+  });
 }
 </script>
 
