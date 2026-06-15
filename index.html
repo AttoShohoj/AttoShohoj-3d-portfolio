@@ -88,6 +88,13 @@ model-viewer, #plyViewer {
 <h2>🚀 AttoShohoj 3D Science Library</h2>
 </header>
 
+  <div style="text-align:center; margin:10px;">
+  <input id="searchBox" placeholder="Search model (heart, brain, water...)"
+  style="padding:10px; width:60%; border-radius:8px;" />
+  <button onclick="searchModel()">Search</button>
+</div>
+  <div id="suggestions" style="text-align:center; color:#aaa; font-size:12px;"></div>
+
 <div class="container">
 
 <!-- VIEWER -->
@@ -129,6 +136,17 @@ model-viewer, #plyViewer {
 
 </div>
 
+
+  const modelsDB = {
+  heart: "zoology/heart.glb",
+  brain: "zoology/brain.glb",
+  leaf: "botany/leaf.glb",
+  water: "chemistry/h2o.glb",
+  magnet: "physics/magnet.glb",
+  "heart anatomy": "zoology/anatomy/heart_anatomy.ply"
+};
+
+  
 <script type="module">
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -209,6 +227,66 @@ window.loadPLY = function(path){
   });
 
 };
+
+window.searchModel = function(){
+
+  const q = document.getElementById("searchBox").value.toLowerCase();
+
+  let path = null;
+
+  const rules = [
+    { keys:["heart","cardiac","human heart"], file:"zoology/heart.glb" },
+    { keys:["brain","neuron","nervous"], file:"zoology/brain.glb" },
+    { keys:["leaf","plant","botany"], file:"botany/leaf.glb" },
+    { keys:["water","h2o","molecule"], file:"chemistry/h2o.glb" },
+    { keys:["magnet","field","physics"], file:"physics/magnet.glb" },
+    { keys:["anatomy","heart anatomy"], file:"zoology/anatomy/heart_anatomy.ply" }
+  ];
+
+  for(let r of rules){
+    if(r.keys.some(k => q.includes(k))){
+      path = r.file;
+      break;
+    }
+  }
+
+  if(!path){
+    alert("AI: No matching model found 😢 Try heart, brain, water...");
+    return;
+  }
+
+  if(path.endsWith(".ply")){
+    loadPLY(path);
+  } else {
+    loadGLB(path);
+  }
+};
+
+  document.getElementById("searchBox").addEventListener("input", function(e){
+
+  const val = e.target.value.toLowerCase();
+
+  const suggestions = [
+    "heart",
+    "brain",
+    "water",
+    "magnet",
+    "leaf",
+    "heart anatomy"
+  ].filter(item => item.includes(val));
+
+  document.getElementById("suggestions").innerHTML =
+    suggestions.map(s => "👉 " + s).join("<br>");
+
+});
+
+  function showLoading(){
+  loading.style.display = "block";
+}
+
+function hideLoading(){
+  setTimeout(()=> loading.style.display = "none", 500);
+}
 </script>
 
 </body>
