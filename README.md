@@ -48,7 +48,7 @@ This project is created for learning and showcasing 3D web development concepts 
 
 This project can be deployed easily using GitHub Pages.
 
-Live URL: [https://your-username.github.io/AttoShohoj-3d-portfolio/]
+Live URL: https://AttoShohoj.github.io/AttoShohoj-3d-portfolio/
 
 ---
 
