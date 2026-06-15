@@ -1,7 +1,47 @@
 {
   "heart": "zoology/heart.glb",
   "brain": "zoology/brain.glb",
+  "lungs": "zoology/lungs.glb",
+  "kidney": "zoology/kidney.glb",
+  "liver": "zoology/liver.glb",
+  "eye": "zoology/eye.glb",
+  "ear": "zoology/ear.glb",
+  "skeleton": "zoology/skeleton.glb",
+  "digestive system": "zoology/digestive_system.glb",
+  "nervous system": "zoology/nervous_system.glb",
+
+
+  
   "leaf": "botany/leaf.glb",
+  "flower": "botany/flower.glb",
+  "root": "botany/root.glb",
+  "stem": "botany/stem.glb",
+  "seed": "botany/seed.glb",
+  "plant cell": "botany/plant_cell.glb",
+  "chloroplast": "botany/chloroplast.glb",
+  "photosynthesis": "botany/photosynthesis.glb",
+
+
+  
   "water": "chemistry/h2o.glb",
-  "magnet": "physics/magnet.glb"
+  "h2o": "chemistry/h2o.glb",
+  "co2": "chemistry/co2.glb",
+  "o2": "chemistry/o2.glb",
+  "hydrogen": "chemistry/hydrogen.glb",
+  "oxygen": "chemistry/oxygen.glb",
+  "carbon": "chemistry/carbon.glb",
+  "methane": "chemistry/methane.glb",
+  "ammonia": "chemistry/ammonia.glb",
+  "benzene": "chemistry/benzene.glb",
+
+
+  
+  "magnet": "physics/magnet.glb",
+  "pendulum": "physics/pendulum.glb",
+  "gravity": "physics/gravity.glb",
+  "wave": "physics/wave.glb",
+  "reflection": "physics/light_reflection.glb",
+  "lens": "physics/lens.glb",
+  "circuit": "physics/circuit.glb",
+  "solar system": "physics/solar_system.glb"
 }
