@@ -8,28 +8,41 @@
   <style>
     body {
       margin: 0;
-      background: #111;
+      font-family: Arial;
+      background: radial-gradient(circle, #222, #000);
       color: white;
       text-align: center;
-      font-family: Arial;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
     }
 
     model-viewer {
       width: 100%;
-      height: 90vh;
+      height: 85vh;
+      background: transparent;
     }
   </style>
 </head>
 
 <body>
 
-  <h2>My 3D Portfolio 🚀</h2>
+  <header>
+    <h1>🚀 My 3D Portfolio</h1>
+    <p>Rotate, Zoom & Explore</p>
+  </header>
 
-  <model-viewer 
+  <model-viewer
     src="model.glb"
     auto-rotate
     camera-controls
-    shadow-intensity="1">
+    shadow-intensity="1"
+    ar>
   </model-viewer>
 
 </body>
