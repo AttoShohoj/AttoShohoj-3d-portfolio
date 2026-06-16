@@ -135,18 +135,7 @@ model-viewer, #plyViewer {
 </div>
 
 </div>
-
-
-  const modelsDB = {
-  heart: "zoology/heart.glb",
-  brain: "zoology/brain.glb",
-  leaf: "botany/leaf.glb",
-  water: "chemistry/h2o.glb",
-  magnet: "physics/magnet.glb",
-  "heart anatomy": "zoology/anatomy/heart_anatomy.ply"
-};
-
-  
+ 
 <script type="module">
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -156,7 +145,6 @@ const glbViewer = document.getElementById("glbViewer");
 const plyViewer = document.getElementById("plyViewer");
 const loading = document.getElementById("loading");
 
-// GLB loader
 window.loadGLB = function(path){
 
   plyViewer.style.display = "none";
@@ -166,9 +154,9 @@ window.loadGLB = function(path){
 
   glbViewer.src = "models/" + path;
 
-  glbViewer.addEventListener("load", () => {
-    loading.style.display = "none";
-  });
+ glbViewer.addEventListener("load", () => {
+  loading.style.display = "none";
+}, { once: true });
 };
 
 // PLY loader
@@ -178,7 +166,7 @@ window.loadPLY = function(path){
   plyViewer.style.display = "block";
   plyViewer.innerHTML = "";
 
-  loading.style.display = "block";
+  loading.style.display = "none";
 
   const scene = new THREE.Scene();
 
@@ -189,10 +177,14 @@ window.loadPLY = function(path){
     1000
   );
 
-  camera.position.z = 2;
+  camera.position.set(0, 0, 2);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+function resize(){
+  renderer.setSize(plyViewer.clientWidth, plyViewer.clientHeight);
+}
+resize();
+window.addEventListener("resize", resize);
   plyViewer.appendChild(renderer.domElement);
 
   const light = new THREE.DirectionalLight(0xffffff, 2);
@@ -280,13 +272,6 @@ window.searchModel = function(){
 
 });
 
-  function showLoading(){
-  loading.style.display = "block";
-}
-
-function hideLoading(){
-  setTimeout(()=> loading.style.display = "none", 500);
-}
 </script>
 
 </body>
