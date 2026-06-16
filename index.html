@@ -272,6 +272,41 @@ window.searchModel = function(){
 
 });
 
+  // সব JS functions শেষ হওয়ার পরে
+
+fetch("models.json")
+  .then(res => res.json())
+  .then(data => {
+
+    const sidebar = document.querySelector(".sidebar");
+
+    sidebar.innerHTML = "";
+
+    for (let key in data) {
+
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerText = key;
+
+      div.onclick = () => {
+
+        const path = data[key];
+
+        if (path.endsWith(".ply")) {
+          loadPLY(path);
+        } else {
+          loadGLB(path);
+        }
+
+      };
+
+      sidebar.appendChild(div);
+    }
+
+  });
+
+</script>
+
 </script>
 
 </body>
